@@ -21,8 +21,14 @@ class SupermarketCheckoutGenericTestCases(unittest.TestCase):
         
     def test_invalid_item(self):
         checkout = calc.SupermarketCheckout(self.pricing_rules)
-        self.assertRaises(ValueError)
+        with self.assertRaises(ValueError):
+            checkout.scan("E")
 
+
+    def test_empty_cart(self):
+        checkout = calc.SupermarketCheckout(self.pricing_rules)
+        with self.assertRaises(KeyError):
+            checkout.total()
             
     def test_calculate_total_without_special_price(self):
         pricing_rules = {

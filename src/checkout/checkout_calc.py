@@ -3,7 +3,7 @@ from typing import Dict
 class SupermarketCheckout:
     '''
     This class represents the mechanism to caculate the total price payable by
-    a customer for their checkout inventory
+    a customer for their checkout cart
     
     params: pricing_rule: Dict ( A Dictionary of a product type with unit and special pricing if any)
     
@@ -15,10 +15,11 @@ class SupermarketCheckout:
         
     def scan(self, item: str):
         '''
-        Method to add items in the inventory
+        Method to add items in the cart
         
         params: item: string
         '''
+        # check if the item is part of the inventory
         if item not in self.pricing_rules:
                 raise ValueError(f"Invalid item: {item}")            
         if item in self.items:
@@ -33,6 +34,10 @@ class SupermarketCheckout:
         
         returns: int ( The total price payable with any special offers applicable on the cart)
         '''
+        # Check if the shopping cart isn't empty
+        if not self.items:
+            raise KeyError(f" Empty Cart ")
+        
         total = 0
         for item, count in self.items.items():
             if item in self.pricing_rules:
@@ -42,9 +47,9 @@ class SupermarketCheckout:
                 if special_price:
                     offer_quantity = special_price["quantity"]
                     offer_price = special_price["price"]
-                    quo, rem = divmod(count, offer_quantity)
-                    total += quo* offer_price
-                    total += rem * price
+                    quotient, remainder = divmod(count, offer_quantity)
+                    total += quotient* offer_price
+                    total += remainder * price
                 else:
                     total += count * price
                     
