@@ -2,6 +2,11 @@
 
 The is the implementation for the given problem statement of creating a checkout function for a Supermarket and calculate total price for a cart considering any special offers.
 
+### Assumptions
+
+Presuming that the pricing list is available as an input for a shopping cart checkout to be initiated.
+Also, that we are just creating a functionality to cater total price payable at checkout and the unit and special prices aren't changing while the total price calculation happens. The solution is currently considering just one instance of the checkout at a Supermarket till. We are not creating any separate product inventory and any functionality for Inventory management and offer price/validity updates.
+
 ### Environment and Structure
 
 The code is written using the version `python 3.10.4`
