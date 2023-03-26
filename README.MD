@@ -56,6 +56,12 @@ And now once the module is imported, we could potentially create the object and 
 
  `python -m unittest tests.checkout_calc_test`
 
+### Packaging Configuration
+
+Added the setuptools based packaging configuration defining how the the solutions could be packaged and converted into a wheel distribution.
+
+Additionaly a pyproject.toml file is also provided to showcase how the packaging could be done using pyproject.toml. It could be used with poetry to manage all configuration in just one file, which makes it easy to build and deliver.
+
 ## Further improvement and scaling of the solution
 
  To scale this solution further, in a distributed computing environment, we can run multiple instances of the SupermarketCheckout class and distribute the load among them, possibly using a load balancer. The pricing rules can be passed to each instance as an argument, so they can be customized for each location or store.
