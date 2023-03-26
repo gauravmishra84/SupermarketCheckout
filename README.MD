@@ -64,5 +64,5 @@ Additionaly a pyproject.toml file is also provided to showcase how the packaging
 
 ## Further improvement and scaling of the solution
 
- To scale this solution further, in a distributed computing environment, we can run multiple instances of the SupermarketCheckout class and distribute the load among them, possibly using a load balancer. The pricing rules can be passed to each instance as an argument, so they can be customized for each location or store.
+ To scale this solution further, in a distributed computing environment, we can run multiple instances of the SupermarketCheckout class and distribute the load among them, possibly using a load balancer. The pricing rules can be passed to each instance as an argument, so they can be customized for each location or store. We can also have a more defined storage and management for inventory and pricing rules targeting specific regions and stores. The solution could be organized in a microservices architecture running in a container orchestrated tool like kubernetes and serving a no of simultaneous requests.
 
