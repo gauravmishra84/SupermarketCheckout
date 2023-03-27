@@ -26,6 +26,7 @@ class SupermarketCheckout:
             self.items[item] += 1
         else:
             self.items[item] = 1
+        
 
         
     def total(self) -> int:
@@ -39,20 +40,38 @@ class SupermarketCheckout:
             raise KeyError(f" Empty Cart ")
         
         total = 0
-        for item, count in self.items.items():
+        cart = list(self.items.keys())
+        for item in cart:
             if item in self.pricing_rules:
                 price = self.pricing_rules[item]["price"]
                 special_price = self.pricing_rules[item].get("special_price")
+                mix_match = self.pricing_rules[item].get("mix_match", None)
                 
                 if special_price:
                     offer_quantity = special_price["quantity"]
                     offer_price = special_price["price"]
-                    quotient, remainder = divmod(count, offer_quantity)
+                    quotient, remainder = divmod(self.items[item], offer_quantity)
                     total += quotient* offer_price
                     total += remainder * price
+                    for _ in range(offer_quantity):
+                        if self.items[item] > 1:
+                            self.items[item] -= 1  
+                        else:
+                            del self.items[item]
+                        
+                elif mix_match:
+                    offer_quantity = mix_match["quantity"]
+                    offer_price = mix_match["price"]
+                    mix_match_items = all(i in mix_match["product_type"] for i in self.items)
+                    if mix_match_items:
+                        total += offer_price
+                        for x in mix_match["product_type"]:
+                            if self.items[x] > 1:
+                                self.items[x] -= 1  
+                            else:
+                                del self.items[x]
                 else:
-                    total += count * price
-                    
+                    total += self.items[item] * price                     
             else:
                 raise ValueError(f"Invalid item: {item}")
 
